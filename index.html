@@ -1,230 +1,402 @@
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>مِسك | بخور وعطور</title>
 
-<title>مِسك | بخور وعطور</title>
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: Arial, sans-serif;
+    }
 
-<style>
+    body {
+      background: #f8f3ec;
+      color: #3d2b1f;
+    }
 
-body{
-    margin:0;
-    font-family:Arial,sans-serif;
-    background:#f8f4ef;
-    color:#2b211c;
-}
+    header {
+      background: #3d2b1f;
+      color: white;
+      padding: 18px 25px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      position: sticky;
+      top: 0;
+      z-index: 10;
+    }
 
-header{
-    background:#fff;
-    padding:20px 7%;
-    display:flex;
-    justify-content:space-between;
-    align-items:center;
-}
+    .logo {
+      font-size: 26px;
+      font-weight: bold;
+    }
 
-.logo{
-    font-size:28px;
-    font-weight:bold;
-}
+    .cart-button {
+      background: #d8b48a;
+      color: #3d2b1f;
+      border: none;
+      padding: 10px 16px;
+      border-radius: 20px;
+      cursor: pointer;
+      font-size: 15px;
+      font-weight: bold;
+    }
 
-.cart{
-    background:#2b211c;
-    color:white;
-    padding:10px 18px;
-    border-radius:25px;
-}
+    .hero {
+      text-align: center;
+      padding: 70px 20px;
+      background: #eadbc8;
+    }
 
-.hero{
-    text-align:center;
-    padding:80px 20px;
-    background:#e8dccd;
-}
+    .hero h1 {
+      font-size: 42px;
+      margin-bottom: 15px;
+    }
 
-.hero h1{
-    font-size:45px;
-    margin:0 0 15px;
-}
+    .hero p {
+      font-size: 18px;
+    }
 
-.hero p{
-    font-size:18px;
-}
+    .products {
+      padding: 40px 20px;
+      max-width: 1100px;
+      margin: auto;
+    }
 
-.button{
-    display:inline-block;
-    margin-top:20px;
-    background:#2b211c;
-    color:white;
-    padding:14px 28px;
-    border-radius:30px;
-    text-decoration:none;
-}
+    .products h2 {
+      text-align: center;
+      margin-bottom: 30px;
+      font-size: 28px;
+    }
 
-section{
-    padding:45px 7%;
-}
+    .product-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 25px;
+    }
 
-h2{
-    text-align:center;
-    margin-bottom:30px;
-}
+    .product {
+      background: white;
+      border-radius: 15px;
+      padding: 20px;
+      text-align: center;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+    }
 
-.products{
-    display:grid;
-    grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
-    gap:20px;
-}
+    .product-image {
+      height: 180px;
+      background: #eee2d2;
+      border-radius: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 55px;
+      margin-bottom: 15px;
+    }
 
-.product{
-    background:white;
-    padding:15px;
-    border-radius:18px;
-    text-align:center;
-}
+    .product h3 {
+      margin-bottom: 10px;
+    }
 
-.product-img{
-    height:220px;
-    background:#ded0bf;
-    border-radius:15px;
-    display:flex;
-    justify-content:center;
-    align-items:center;
-    font-size:60px;
-}
+    .price {
+      font-weight: bold;
+      margin-bottom: 15px;
+    }
 
-.product h3{
-    margin-bottom:8px;
-}
+    .add-button {
+      background: #3d2b1f;
+      color: white;
+      border: none;
+      padding: 11px 18px;
+      border-radius: 20px;
+      cursor: pointer;
+    }
 
-.price{
-    color:#80604b;
-    font-weight:bold;
-}
+    .add-button:hover {
+      opacity: 0.85;
+    }
 
-.add{
-    margin-top:12px;
-    width:100%;
-    padding:12px;
-    border:0;
-    border-radius:10px;
-    background:#2b211c;
-    color:white;
-}
+    footer {
+      text-align: center;
+      padding: 25px;
+      background: #3d2b1f;
+      color: white;
+      margin-top: 40px;
+    }
 
-footer{
-    text-align:center;
-    padding:30px;
-    background:#fff;
-}
+    /* نافذة السلة */
 
-</style>
+    .cart-overlay {
+      display: none;
+      position: fixed;
+      inset: 0;
+      background: rgba(0,0,0,0.5);
+      z-index: 100;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+    }
+
+    .cart-window {
+      background: white;
+      width: 100%;
+      max-width: 500px;
+      max-height: 85vh;
+      overflow-y: auto;
+      border-radius: 20px;
+      padding: 25px;
+      position: relative;
+    }
+
+    .close-cart {
+      position: absolute;
+      left: 18px;
+      top: 15px;
+      border: none;
+      background: none;
+      font-size: 25px;
+      cursor: pointer;
+    }
+
+    .cart-window h2 {
+      margin-bottom: 25px;
+    }
+
+    .cart-item {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border-bottom: 1px solid #eee;
+      padding: 15px 0;
+      gap: 10px;
+    }
+
+    .quantity-buttons {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .quantity-buttons button {
+      width: 28px;
+      height: 28px;
+      border: none;
+      border-radius: 50%;
+      background: #eadbc8;
+      cursor: pointer;
+    }
+
+    .total {
+      font-size: 20px;
+      font-weight: bold;
+      margin-top: 25px;
+      text-align: center;
+    }
+
+    .empty-cart {
+      text-align: center;
+      padding: 30px;
+      color: #777;
+    }
+  </style>
 </head>
 
 <body>
 
-<header>
+  <header>
+    <div class="logo">مِسك</div>
 
-<div class="logo">مِسك</div>
+    <button class="cart-button" onclick="openCart()">
+      🛒 السلة (<span id="cart-count">0</span>)
+    </button>
+  </header>
 
-<div class="cart">
-السلة 🛒 <span id="count">0</span>
-</div>
+  <section class="hero">
+    <h1>عبقٌ يبقى</h1>
+    <p>بخور وعطور مختارة بعناية لتترك أثرًا لا يُنسى</p>
+  </section>
 
-</header>
+  <section class="products">
 
+    <h2>منتجاتنا</h2>
 
-<div class="hero">
+    <div class="product-grid">
 
-<h1>عبقٌ يبقى</h1>
+      <div class="product">
+        <div class="product-image">🪵</div>
+        <h3>بخور مِسك</h3>
+        <div class="price">85 ريال</div>
+        <button class="add-button" onclick="addToCart('بخور مِسك', 85)">
+          أضيفي للسلة
+        </button>
+      </div>
 
-<p>
-بخور وعطور مختارة بعناية لتترك أثرًا لا يُنسى
-</p>
+      <div class="product">
+        <div class="product-image">🌹</div>
+        <h3>عطر ورد</h3>
+        <div class="price">120 ريال</div>
+        <button class="add-button" onclick="addToCart('عطر ورد', 120)">
+          أضيفي للسلة
+        </button>
+      </div>
 
-<a href="#products" class="button">
-تسوقي الآن
-</a>
+      <div class="product">
+        <div class="product-image">✨</div>
+        <h3>عطر شرقي</h3>
+        <div class="price">145 ريال</div>
+        <button class="add-button" onclick="addToCart('عطر شرقي', 145)">
+          أضيفي للسلة
+        </button>
+      </div>
 
-</div>
+    </div>
 
+  </section>
 
-<section id="products">
+  <!-- نافذة السلة -->
 
-<h2>منتجاتنا</h2>
+  <div class="cart-overlay" id="cart-overlay" onclick="closeCartOutside(event)">
 
-<div class="products">
+    <div class="cart-window">
 
+      <button class="close-cart" onclick="closeCart()">×</button>
 
-<div class="product">
+      <h2>🛒 سلة المشتريات</h2>
 
-<div class="product-img">🪵</div>
+      <div id="cart-items"></div>
 
-<h3>بخور مِسك</h3>
+      <div class="total">
+        المجموع: <span id="cart-total">0</span> ريال
+      </div>
 
-<p class="price">85 ريال</p>
+    </div>
 
-<button class="add" onclick="addToCart()">
-أضيفي للسلة
-</button>
+  </div>
 
-</div>
+  <footer>
+    © 2026 مِسك — جميع الحقوق محفوظة
+  </footer>
 
+  <script>
 
-<div class="product">
+    let cart = [];
 
-<div class="product-img">🌹</div>
+    function addToCart(name, price) {
 
-<h3>عطر ورد</h3>
+      const existingProduct = cart.find(item => item.name === name);
 
-<p class="price">120 ريال</p>
+      if (existingProduct) {
+        existingProduct.quantity++;
+      } else {
+        cart.push({
+          name: name,
+          price: price,
+          quantity: 1
+        });
+      }
 
-<button class="add" onclick="addToCart()">
-أضيفي للسلة
-</button>
+      updateCart();
 
-</div>
+      alert("تمت إضافة المنتج إلى السلة 🤎");
+    }
 
+    function updateCart() {
 
-<div class="product">
+      let count = 0;
+      let total = 0;
 
-<div class="product-img">✨</div>
+      cart.forEach(item => {
+        count += item.quantity;
+        total += item.price * item.quantity;
+      });
 
-<h3>عطر شرقي</h3>
+      document.getElementById("cart-count").textContent = count;
+      document.getElementById("cart-total").textContent = total;
 
-<p class="price">145 ريال</p>
+      const cartItems = document.getElementById("cart-items");
 
-<button class="add" onclick="addToCart()">
-أضيفي للسلة
-</button>
+      if (cart.length === 0) {
 
-</div>
+        cartItems.innerHTML = `
+          <div class="empty-cart">
+            السلة فارغة 🛒
+          </div>
+        `;
 
+        return;
+      }
 
-</div>
+      cartItems.innerHTML = "";
 
-</section>
+      cart.forEach((item, index) => {
 
+        cartItems.innerHTML += `
 
-<footer>
+          <div class="cart-item">
 
-© 2026 مِسك — جميع الحقوق محفوظة
+            <div>
+              <strong>${item.name}</strong>
+              <br>
+              ${item.price} ريال
+            </div>
 
-</footer>
+            <div class="quantity-buttons">
 
+              <button onclick="changeQuantity(${index}, 1)">
+                +
+              </button>
 
-<script>
+              <span>${item.quantity}</span>
 
-let count = 0;
+              <button onclick="changeQuantity(${index}, -1)">
+                −
+              </button>
 
-function addToCart(){
+            </div>
 
-count++;
+          </div>
 
-document.getElementById("count").innerText = count;
+        `;
+      });
+    }
 
-}
+    function changeQuantity(index, amount) {
 
-</script>
+      cart[index].quantity += amount;
+
+      if (cart[index].quantity <= 0) {
+        cart.splice(index, 1);
+      }
+
+      updateCart();
+    }
+
+    function openCart() {
+
+      updateCart();
+
+      document.getElementById("cart-overlay").style.display = "flex";
+    }
+
+    function closeCart() {
+
+      document.getElementById("cart-overlay").style.display = "none";
+    }
+
+    function closeCartOutside(event) {
+
+      if (event.target.id === "cart-overlay") {
+        closeCart();
+      }
+    }
+
+    updateCart();
+
+  </script>
 
 </body>
 </html>
