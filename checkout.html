@@ -1,0 +1,309 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>إتمام الطلب | مِسك</title>
+
+  <style>
+    * {
+      box-sizing: border-box;
+      font-family: Arial, sans-serif;
+    }
+
+    body {
+      margin: 0;
+      background: #f8f3ec;
+      color: #3d2b1f;
+    }
+
+    header {
+      background: #3d2b1f;
+      color: white;
+      padding: 18px 25px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .logo {
+      font-size: 26px;
+      font-weight: bold;
+    }
+
+    .back {
+      color: white;
+      text-decoration: none;
+    }
+
+    main {
+      max-width: 700px;
+      margin: 40px auto;
+      padding: 20px;
+    }
+
+    .box {
+      background: white;
+      border-radius: 20px;
+      padding: 30px;
+      box-shadow: 0 5px 20px rgba(0,0,0,0.08);
+    }
+
+    h1 {
+      text-align: center;
+      margin-bottom: 30px;
+    }
+
+    label {
+      display: block;
+      margin-top: 18px;
+      margin-bottom: 7px;
+      font-weight: bold;
+    }
+
+    input,
+    textarea,
+    select {
+      width: 100%;
+      padding: 13px;
+      border: 1px solid #ddd;
+      border-radius: 10px;
+      font-size: 15px;
+      background: white;
+    }
+
+    textarea {
+      height: 90px;
+      resize: vertical;
+    }
+
+    .payment {
+      margin-top: 20px;
+    }
+
+    .payment-option {
+      border: 1px solid #ddd;
+      padding: 14px;
+      border-radius: 10px;
+      margin-top: 10px;
+      cursor: pointer;
+    }
+
+    .summary {
+      background: #f8f3ec;
+      padding: 18px;
+      border-radius: 12px;
+      margin-top: 25px;
+    }
+
+    .confirm {
+      width: 100%;
+      margin-top: 25px;
+      padding: 15px;
+      background: #3d2b1f;
+      color: white;
+      border: none;
+      border-radius: 30px;
+      font-size: 17px;
+      cursor: pointer;
+    }
+
+    .success {
+      display: none;
+      text-align: center;
+      padding: 30px 10px;
+    }
+
+    .success h2 {
+      font-size: 28px;
+    }
+
+    .order-number {
+      font-weight: bold;
+      font-size: 20px;
+      margin: 20px 0;
+    }
+
+  </style>
+</head>
+
+<body>
+
+<header>
+
+  <div class="logo">مِسك</div>
+
+  <a class="back" href="cart.html">
+    ← العودة للسلة
+  </a>
+
+</header>
+
+
+<main>
+
+  <div class="box" id="order-form">
+
+    <h1>إتمام الطلب</h1>
+
+    <label>الاسم الكامل</label>
+    <input
+      type="text"
+      id="name"
+      placeholder="اكتبي اسمك"
+    >
+
+    <label>رقم الجوال</label>
+    <input
+      type="tel"
+      id="phone"
+      placeholder="05xxxxxxxx"
+    >
+
+    <label>المدينة</label>
+    <input
+      type="text"
+      id="city"
+      placeholder="مثال: أبها"
+    >
+
+    <label>العنوان</label>
+    <textarea
+      id="address"
+      placeholder="اكتبي عنوان التوصيل بالتفصيل"
+    ></textarea>
+
+    <label>ملاحظات الطلب</label>
+    <textarea
+      id="notes"
+      placeholder="أي ملاحظات إضافية؟"
+    ></textarea>
+
+
+    <div class="payment">
+
+      <label>طريقة الدفع</label>
+
+      <label class="payment-option">
+        <input type="radio" name="payment" value="بطاقة إلكترونية">
+        💳 بطاقة إلكترونية
+      </label>
+
+      <label class="payment-option">
+        <input type="radio" name="payment" value="تحويل بنكي">
+        🏦 تحويل بنكي
+      </label>
+
+      <label class="payment-option">
+        <input type="radio" name="payment" value="الدفع عند الاستلام">
+        💵 الدفع عند الاستلام
+      </label>
+
+    </div>
+
+
+    <div class="summary">
+
+      <strong>ملخص الطلب</strong>
+
+      <p>
+        المجموع:
+        <strong>
+          <span id="total">0</span> ريال
+        </strong>
+      </p>
+
+    </div>
+
+
+    <button class="confirm" onclick="confirmOrder()">
+      تأكيد الطلب
+    </button>
+
+  </div>
+
+
+  <div class="success" id="success">
+
+    <h2>🎉 تم استلام طلبك</h2>
+
+    <p>
+      شكرًا لطلبك من مِسك 🤎
+    </p>
+
+    <div class="order-number">
+      رقم الطلب: #<span id="order-number"></span>
+    </div>
+
+    <p>
+      سيتم التواصل معك لتأكيد الطلب.
+    </p>
+
+    <br>
+
+    <a href="index.html">
+      العودة للمتجر
+    </a>
+
+  </div>
+
+</main>
+
+
+<script>
+
+  let cart = JSON.parse(localStorage.getItem("miskCart")) || [];
+
+  let total = 0;
+
+  cart.forEach(item => {
+    total += item.price * item.quantity;
+  });
+
+  document.getElementById("total").textContent = total;
+
+
+  function confirmOrder() {
+
+    const name = document.getElementById("name").value.trim();
+    const phone = document.getElementById("phone").value.trim();
+    const city = document.getElementById("city").value.trim();
+    const address = document.getElementById("address").value.trim();
+
+    const payment =
+      document.querySelector('input[name="payment"]:checked');
+
+
+    if (!name || !phone || !city || !address || !payment) {
+
+      alert("فضلاً عبّي جميع البيانات واختاري طريقة الدفع 🤎");
+
+      return;
+    }
+
+
+    const orderNumber =
+      Math.floor(1000 + Math.random() * 9000);
+
+
+    document.getElementById("order-number").textContent =
+      orderNumber;
+
+
+    document.getElementById("order-form").style.display =
+      "none";
+
+    document.getElementById("success").style.display =
+      "block";
+
+
+    // تجريبي فقط
+    localStorage.removeItem("miskCart");
+
+  }
+
+</script>
+
+</body>
+</html>
