@@ -3,6 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
   <title>مِسك | بخور وعطور</title>
 
   <style>
@@ -18,6 +19,8 @@
       color: #3d2b1f;
     }
 
+    /* الهيدر */
+
     header {
       background: #3d2b1f;
       color: white;
@@ -27,11 +30,11 @@
       align-items: center;
       position: sticky;
       top: 0;
-      z-index: 10;
+      z-index: 20;
     }
 
     .logo {
-      font-size: 26px;
+      font-size: 28px;
       font-weight: bold;
     }
 
@@ -39,364 +42,589 @@
       background: #d8b48a;
       color: #3d2b1f;
       border: none;
-      padding: 10px 16px;
-      border-radius: 20px;
+      padding: 11px 18px;
+      border-radius: 25px;
       cursor: pointer;
-      font-size: 15px;
       font-weight: bold;
+      font-size: 15px;
     }
+
+    /* الرئيسية */
 
     .hero {
       text-align: center;
-      padding: 70px 20px;
+      padding: 75px 20px;
       background: #eadbc8;
     }
 
     .hero h1 {
-      font-size: 42px;
+      font-size: 44px;
       margin-bottom: 15px;
     }
 
     .hero p {
       font-size: 18px;
+      margin-bottom: 25px;
     }
+
+    .shop-button {
+      display: inline-block;
+      background: #3d2b1f;
+      color: white;
+      text-decoration: none;
+      padding: 13px 28px;
+      border-radius: 30px;
+    }
+
+    /* الأقسام */
+
+    .categories {
+      max-width: 1100px;
+      margin: 45px auto;
+      padding: 0 20px;
+    }
+
+    .section-title {
+      text-align: center;
+      font-size: 30px;
+      margin-bottom: 30px;
+    }
+
+    .category-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 18px;
+    }
+
+    .category {
+      background: white;
+      border-radius: 18px;
+      padding: 28px 15px;
+      text-align: center;
+      cursor: pointer;
+      box-shadow: 0 5px 18px rgba(0,0,0,0.07);
+      transition: 0.2s;
+    }
+
+    .category:hover {
+      transform: translateY(-4px);
+    }
+
+    .category-icon {
+      font-size: 42px;
+      margin-bottom: 12px;
+    }
+
+    .category h3 {
+      font-size: 18px;
+    }
+
+    /* المنتجات */
 
     .products {
-      padding: 40px 20px;
       max-width: 1100px;
-      margin: auto;
+      margin: 50px auto;
+      padding: 0 20px;
     }
 
-    .products h2 {
-      text-align: center;
-      margin-bottom: 30px;
-      font-size: 28px;
+    .category-title {
+      font-size: 25px;
+      margin: 40px 0 20px;
+      border-right: 5px solid #d8b48a;
+      padding-right: 12px;
     }
 
     .product-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-      gap: 25px;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 22px;
     }
 
     .product {
       background: white;
-      border-radius: 15px;
-      padding: 20px;
+      border-radius: 18px;
+      padding: 18px;
       text-align: center;
-      box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+      box-shadow: 0 5px 18px rgba(0,0,0,0.07);
     }
 
     .product-image {
-      height: 180px;
+      height: 190px;
       background: #eee2d2;
-      border-radius: 12px;
+      border-radius: 14px;
       display: flex;
       align-items: center;
       justify-content: center;
-      font-size: 55px;
+      font-size: 60px;
       margin-bottom: 15px;
     }
 
     .product h3 {
-      margin-bottom: 10px;
+      margin-bottom: 9px;
+    }
+
+    .description {
+      color: #777;
+      font-size: 14px;
+      margin-bottom: 12px;
     }
 
     .price {
       font-weight: bold;
+      font-size: 17px;
       margin-bottom: 15px;
     }
 
     .add-button {
+      width: 100%;
       background: #3d2b1f;
       color: white;
       border: none;
-      padding: 11px 18px;
-      border-radius: 20px;
+      padding: 12px;
+      border-radius: 25px;
       cursor: pointer;
+      font-size: 15px;
     }
 
     .add-button:hover {
       opacity: 0.85;
     }
 
+    /* الفوتر */
+
     footer {
-      text-align: center;
-      padding: 25px;
       background: #3d2b1f;
       color: white;
-      margin-top: 40px;
-    }
-
-    /* نافذة السلة */
-
-    .cart-overlay {
-      display: none;
-      position: fixed;
-      inset: 0;
-      background: rgba(0,0,0,0.5);
-      z-index: 100;
-      align-items: center;
-      justify-content: center;
-      padding: 20px;
-    }
-
-    .cart-window {
-      background: white;
-      width: 100%;
-      max-width: 500px;
-      max-height: 85vh;
-      overflow-y: auto;
-      border-radius: 20px;
-      padding: 25px;
-      position: relative;
-    }
-
-    .close-cart {
-      position: absolute;
-      left: 18px;
-      top: 15px;
-      border: none;
-      background: none;
-      font-size: 25px;
-      cursor: pointer;
-    }
-
-    .cart-window h2 {
-      margin-bottom: 25px;
-    }
-
-    .cart-item {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      border-bottom: 1px solid #eee;
-      padding: 15px 0;
-      gap: 10px;
-    }
-
-    .quantity-buttons {
-      display: flex;
-      align-items: center;
-      gap: 8px;
-    }
-
-    .quantity-buttons button {
-      width: 28px;
-      height: 28px;
-      border: none;
-      border-radius: 50%;
-      background: #eadbc8;
-      cursor: pointer;
-    }
-
-    .total {
-      font-size: 20px;
-      font-weight: bold;
-      margin-top: 25px;
-      text-align: center;
-    }
-
-    .empty-cart {
       text-align: center;
       padding: 30px;
-      color: #777;
+      margin-top: 60px;
     }
+
+    /* للجوال */
+
+    @media (max-width: 750px) {
+
+      .category-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+
+      .product-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .hero h1 {
+        font-size: 34px;
+      }
+
+    }
+
   </style>
 </head>
 
 <body>
 
-  <header>
-    <div class="logo">مِسك</div>
+<header>
 
-    <button class="cart-button" onclick="openCart()">
-      🛒 السلة (<span id="cart-count">0</span>)
-    </button>
-  </header>
+  <div class="logo">
+    مِسك
+  </div>
 
-  <section class="hero">
-    <h1>عبقٌ يبقى</h1>
-    <p>بخور وعطور مختارة بعناية لتترك أثرًا لا يُنسى</p>
-  </section>
+  <button class="cart-button" onclick="goToCart()">
+    🛒 السلة
+    (<span id="cart-count">0</span>)
+  </button>
 
-  <section class="products">
+</header>
 
-    <h2>منتجاتنا</h2>
 
-    <div class="product-grid">
+<section class="hero">
 
-      <div class="product">
-        <div class="product-image">🪵</div>
-        <h3>بخور مِسك</h3>
-        <div class="price">85 ريال</div>
-        <button class="add-button" onclick="addToCart('بخور مِسك', 85)">
-          أضيفي للسلة
-        </button>
+  <h1>عبقٌ يبقى 🤎</h1>
+
+  <p>
+    بخور وعطور ومنتجات عطرية مختارة بعناية
+  </p>
+
+  <a href="#products" class="shop-button">
+    تسوقي الآن
+  </a>
+
+</section>
+
+
+<!-- الأقسام -->
+
+<section class="categories">
+
+  <h2 class="section-title">
+    تسوقي حسب القسم
+  </h2>
+
+  <div class="category-grid">
+
+    <div class="category" onclick="scrollToSection('miskat')">
+      <div class="category-icon">🌸</div>
+      <h3>المستكات</h3>
+    </div>
+
+    <div class="category" onclick="scrollToSection('room')">
+      <div class="category-icon">🏠</div>
+      <h3>معطرات المفارش</h3>
+    </div>
+
+    <div class="category" onclick="scrollToSection('bukhoor')">
+      <div class="category-icon">🪵</div>
+      <h3>البخور</h3>
+    </div>
+
+    <div class="category" onclick="scrollToSection('perfume')">
+      <div class="category-icon">🌹</div>
+      <h3>العطور</h3>
+    </div>
+
+  </div>
+
+</section>
+
+
+<!-- المنتجات -->
+
+<section class="products" id="products">
+
+
+  <!-- المستكات -->
+
+  <h2 class="category-title" id="miskat">
+    🌸 المستكات
+  </h2>
+
+  <div class="product-grid">
+
+    <div class="product">
+
+      <div class="product-image">
+        🌸
       </div>
 
-      <div class="product">
-        <div class="product-image">🌹</div>
-        <h3>عطر ورد</h3>
-        <div class="price">120 ريال</div>
-        <button class="add-button" onclick="addToCart('عطر ورد', 120)">
-          أضيفي للسلة
-        </button>
+      <h3>مستكة فاخرة</h3>
+
+      <p class="description">
+        مستكة برائحة مميزة وثابتة
+      </p>
+
+      <div class="price">
+        45 ريال
       </div>
 
-      <div class="product">
-        <div class="product-image">✨</div>
-        <h3>عطر شرقي</h3>
-        <div class="price">145 ريال</div>
-        <button class="add-button" onclick="addToCart('عطر شرقي', 145)">
-          أضيفي للسلة
-        </button>
-      </div>
+      <button
+        class="add-button"
+        onclick="addToCart('مستكة فاخرة', 45)"
+      >
+        أضيفي للسلة
+      </button>
 
     </div>
 
-  </section>
 
-  <!-- نافذة السلة -->
+    <div class="product">
 
-  <div class="cart-overlay" id="cart-overlay" onclick="closeCartOutside(event)">
-
-    <div class="cart-window">
-
-      <button class="close-cart" onclick="closeCart()">×</button>
-
-      <h2>🛒 سلة المشتريات</h2>
-
-      <div id="cart-items"></div>
-
-      <div class="total">
-        المجموع: <span id="cart-total">0</span> ريال
+      <div class="product-image">
+        ✨
       </div>
+
+      <h3>مستكة ملكية</h3>
+
+      <p class="description">
+        رائحة ناعمة وفاخرة
+      </p>
+
+      <div class="price">
+        60 ريال
+      </div>
+
+      <button
+        class="add-button"
+        onclick="addToCart('مستكة ملكية', 60)"
+      >
+        أضيفي للسلة
+      </button>
 
     </div>
 
   </div>
 
-  <footer>
-    © 2026 مِسك — جميع الحقوق محفوظة
-  </footer>
 
-  <script>
+  <!-- معطرات المفارش -->
 
-    let cart = [];
+  <h2 class="category-title" id="room">
+    🏠 معطرات المفارش
+  </h2>
 
-    function addToCart(name, price) {
+  <div class="product-grid">
 
-      const existingProduct = cart.find(item => item.name === name);
+    <div class="product">
 
-      if (existingProduct) {
-        existingProduct.quantity++;
-      } else {
-        cart.push({
-          name: name,
-          price: price,
-          quantity: 1
-        });
-      }
+      <div class="product-image">
+        🌿
+      </div>
 
-      updateCart();
+      <h3>معطر مفارش نسيم</h3>
 
-      alert("تمت إضافة المنتج إلى السلة 🤎");
-    }
+      <p class="description">
+        رائحة منعشة وهادئة
+      </p>
 
-    function updateCart() {
+      <div class="price">
+        55 ريال
+      </div>
 
-      let count = 0;
-      let total = 0;
+      <button
+        class="add-button"
+        onclick="addToCart('معطر مفارش نسيم', 55)"
+      >
+        أضيفي للسلة
+      </button>
 
-      cart.forEach(item => {
-        count += item.quantity;
-        total += item.price * item.quantity;
+    </div>
+
+
+    <div class="product">
+
+      <div class="product-image">
+        🌷
+      </div>
+
+      <h3>معطر مفارش ورد</h3>
+
+      <p class="description">
+        رائحة ورد ناعمة
+      </p>
+
+      <div class="price">
+        65 ريال
+      </div>
+
+      <button
+        class="add-button"
+        onclick="addToCart('معطر مفارش ورد', 65)"
+      >
+        أضيفي للسلة
+      </button>
+
+    </div>
+
+  </div>
+
+
+  <!-- البخور -->
+
+  <h2 class="category-title" id="bukhoor">
+    🪵 البخور
+  </h2>
+
+  <div class="product-grid">
+
+    <div class="product">
+
+      <div class="product-image">
+        🪵
+      </div>
+
+      <h3>بخور مِسك</h3>
+
+      <p class="description">
+        بخور فاخر برائحة شرقية
+      </p>
+
+      <div class="price">
+        85 ريال
+      </div>
+
+      <button
+        class="add-button"
+        onclick="addToCart('بخور مِسك', 85)"
+      >
+        أضيفي للسلة
+      </button>
+
+    </div>
+
+
+    <div class="product">
+
+      <div class="product-image">
+        🔥
+      </div>
+
+      <h3>بخور ملكي</h3>
+
+      <p class="description">
+        تركيبة فاخرة وثابتة
+      </p>
+
+      <div class="price">
+        110 ريال
+      </div>
+
+      <button
+        class="add-button"
+        onclick="addToCart('بخور ملكي', 110)"
+      >
+        أضيفي للسلة
+      </button>
+
+    </div>
+
+  </div>
+
+
+  <!-- العطور -->
+
+  <h2 class="category-title" id="perfume">
+    🌹 العطور
+  </h2>
+
+  <div class="product-grid">
+
+    <div class="product">
+
+      <div class="product-image">
+        🌹
+      </div>
+
+      <h3>عطر ورد</h3>
+
+      <p class="description">
+        عطر ناعم بلمسة وردية
+      </p>
+
+      <div class="price">
+        120 ريال
+      </div>
+
+      <button
+        class="add-button"
+        onclick="addToCart('عطر ورد', 120)"
+      >
+        أضيفي للسلة
+      </button>
+
+    </div>
+
+
+    <div class="product">
+
+      <div class="product-image">
+        ✨
+      </div>
+
+      <h3>عطر شرقي</h3>
+
+      <p class="description">
+        عطر دافئ وفاخر
+      </p>
+
+      <div class="price">
+        145 ريال
+      </div>
+
+      <button
+        class="add-button"
+        onclick="addToCart('عطر شرقي', 145)"
+      >
+        أضيفي للسلة
+      </button>
+
+    </div>
+
+  </div>
+
+</section>
+
+
+<footer>
+
+  © 2026 مِسك — جميع الحقوق محفوظة
+
+</footer>
+
+
+<script>
+
+  let cart =
+    JSON.parse(localStorage.getItem("miskCart")) || [];
+
+
+  function addToCart(name, price) {
+
+    const existing =
+      cart.find(item => item.name === name);
+
+
+    if (existing) {
+
+      existing.quantity++;
+
+    } else {
+
+      cart.push({
+        name: name,
+        price: price,
+        quantity: 1
       });
 
-      document.getElementById("cart-count").textContent = count;
-      document.getElementById("cart-total").textContent = total;
+    }
 
-      const cartItems = document.getElementById("cart-items");
 
-      if (cart.length === 0) {
+    localStorage.setItem(
+      "miskCart",
+      JSON.stringify(cart)
+    );
 
-        cartItems.innerHTML = `
-          <div class="empty-cart">
-            السلة فارغة 🛒
-          </div>
-        `;
 
-        return;
-      }
+    updateCartCount();
 
-      cartItems.innerHTML = "";
 
-      cart.forEach((item, index) => {
+    alert("تمت إضافة المنتج للسلة 🤎");
 
-        cartItems.innerHTML += `
+  }
 
-          <div class="cart-item">
 
-            <div>
-              <strong>${item.name}</strong>
-              <br>
-              ${item.price} ريال
-            </div>
+  function updateCartCount() {
 
-            <div class="quantity-buttons">
+    let count = 0;
 
-              <button onclick="changeQuantity(${index}, 1)">
-                +
-              </button>
+    cart.forEach(item => {
+      count += item.quantity;
+    });
 
-              <span>${item.quantity}</span>
+    document.getElementById(
+      "cart-count"
+    ).textContent = count;
 
-              <button onclick="changeQuantity(${index}, -1)">
-                −
-              </button>
+  }
 
-            </div>
 
-          </div>
+  function goToCart() {
 
-        `;
+    window.location.href = "cart.html";
+
+  }
+
+
+  function scrollToSection(id) {
+
+    document.getElementById(id)
+      .scrollIntoView({
+        behavior: "smooth"
       });
-    }
 
-    function changeQuantity(index, amount) {
+  }
 
-      cart[index].quantity += amount;
 
-      if (cart[index].quantity <= 0) {
-        cart.splice(index, 1);
-      }
+  updateCartCount();
 
-      updateCart();
-    }
-
-    function openCart() {
-
-      updateCart();
-
-      document.getElementById("cart-overlay").style.display = "flex";
-    }
-
-    function closeCart() {
-
-      document.getElementById("cart-overlay").style.display = "none";
-    }
-
-    function closeCartOutside(event) {
-
-      if (event.target.id === "cart-overlay") {
-        closeCart();
-      }
-    }
-
-    updateCart();
-
-  </script>
+</script>
 
 </body>
 </html>
