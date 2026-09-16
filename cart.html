@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>السلة | مِسك</title>
+
+  <style>
+    * {
+      box-sizing: border-box;
+      font-family: Arial, sans-serif;
+    }
+
+    body {
+      margin: 0;
+      background: #f8f3ec;
+      color: #3d2b1f;
+    }
+
+    header {
+      background: #3d2b1f;
+      color: white;
+      padding: 18px 25px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .logo {
+      font-size: 26px;
+      font-weight: bold;
+    }
+
+    .back {
+      color: white;
+      text-decoration: none;
+    }
+
+    main {
+      max-width: 800px;
+      margin: 40px auto;
+      padding: 20px;
+    }
+
+    .box {
+      background: white;
+      border-radius: 20px;
+      padding: 25px;
+      box-shadow: 0 5px 20px rgba(0,0,0,0.08);
+    }
+
+    h1 {
+      text-align: center;
+      margin-bottom: 30px;
+    }
+
+    .cart-item {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border-bottom: 1px solid #eee;
+      padding: 18px 0;
+      gap: 15px;
+    }
+
+    .quantity {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .quantity button {
+      border: none;
+      background: #eadbc8;
+      width: 30px;
+      height: 30px;
+      border-radius: 50%;
+      cursor: pointer;
+      font-size: 18px;
+    }
+
+    .total {
+      text-align: center;
+      font-size: 22px;
+      font-weight: bold;
+      margin: 30px 0;
+    }
+
+    .checkout {
+      display: block;
+      width: 100%;
+      padding: 15px;
+      background: #3d2b1f;
+      color: white;
+      border: none;
+      border-radius: 30px;
+      font-size: 17px;
+      cursor: pointer;
+      text-decoration: none;
+      text-align: center;
+    }
+
+    .empty {
+      text-align: center;
+      padding: 40px;
+      color: #777;
+    }
+  </style>
+</head>
+
+<body>
+
+<header>
+  <div class="logo">مِسك</div>
+  <a class="back" href="index.html">← متابعة التسوق</a>
+</header>
+
+<main>
+  <div class="box">
+
+    <h1>🛒 سلة المشتريات</h1>
+
+    <div id="cart-items"></div>
+
+    <div class="total">
+      المجموع: <span id="total">0</span> ريال
+    </div>
+
+    <a href="checkout.html" class="checkout">
+      إتمام الطلب
+    </a>
+
+  </div>
+</main>
+
+<script>
+
+  let cart = JSON.parse(localStorage.getItem("miskCart")) || [];
+
+  function displayCart() {
+
+    const container = document.getElementById("cart-items");
+    const totalElement = document.getElementById("total");
+
+    if (cart.length === 0) {
+
+      container.innerHTML = `
+        <div class="empty">
+          السلة فارغة 🛒
+          <br><br>
+          <a href="index.html">العودة للمنتجات</a>
+        </div>
+      `;
+
+      totalElement.textContent = "0";
+      return;
+    }
+
+    let total = 0;
+    container.innerHTML = "";
+
+    cart.forEach((item, index) => {
+
+      total += item.price * item.quantity;
+
+      container.innerHTML += `
+
+        <div class="cart-item">
+
+          <div>
+            <strong>${item.name}</strong>
+            <br>
+            ${item.price} ريال
+          </div>
+
+          <div class="quantity">
+
+            <button onclick="changeQuantity(${index}, 1)">
+              +
+            </button>
+
+            <span>${item.quantity}</span>
+
+            <button onclick="changeQuantity(${index}, -1)">
+              −
+            </button>
+
+          </div>
+
+        </div>
+
+      `;
+    });
+
+    totalElement.textContent = total;
+  }
+
+  function changeQuantity(index, amount) {
+
+    cart[index].quantity += amount;
+
+    if (cart[index].quantity <= 0) {
+      cart.splice(index, 1);
+    }
+
+    localStorage.setItem("miskCart", JSON.stringify(cart));
+
+    displayCart();
+  }
+
+  displayCart();
+
+</script>
+
+</body>
+</html>
